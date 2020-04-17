@@ -35,8 +35,10 @@ opposite = {'n': 's', 's': "n", "w": "e", "e": "w"}
 
 def travel_world(visited=[]):
     storage = []
-
-    for direction in player.current_room.get_exits():
+    exits = set(player.current_room.get_exits())
+    while len(exits) > 0:
+        direction = random.choice(tuple(exits))
+        exits.remove(direction)
         player.travel(direction)
 
         if player.current_room.id not in visited:
